@@ -40,4 +40,25 @@ docker run ex1
 
 # subir o container do exercício 1 e eliminar ele após rodar todas as linhas do Dockerfile
 docker run --rm ex1
+
+# alterar o script do exercício 1 com o texto
+print("Esse script foi alterado)
+
+# subir novamente o script do exercício 1 com o argumento --rm
+docker run --rm ex1
+```
+
+Execício 2
+
+Digitar no terminal
+
+```
+# entrar na pasta do exercício 2
+cd aula/ex2
+
+# gerar a imagem do exercício 2 com o nome ex2
+docker build . -t ex2
+
+# subir o container do exercício 1
+docker run ex2
 ```
