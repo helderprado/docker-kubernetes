@@ -57,8 +57,14 @@ Digitar no terminal
 cd aula/ex2
 
 # gerar a imagem do exercício 2 com o nome ex2
-docker build . -t ex2
+docker build . -t ex2:1.0
 
 # subir o container do exercício 1
-docker run ex2
+docker run -d ex2:1.0
+
+# verificar os containers que estão rodando na máquina
+docker ps
+
+# acessar o terminal docker container via linha de comando
+docker ps
 ```
