@@ -24,7 +24,7 @@ Rodando a primeira imagem docker
 docker run hello-world
 ```
 
-Execício 1
+Execício 1 (Fazer o build e rodar um container via Dockerfile)
 
 Digitar no terminal
 
@@ -50,7 +50,7 @@ docker run --rm ex1
 
 Execício 2
 
-Digitar no terminal
+Digitar no terminal (Container sem interrupção e utilização do terminal do container)
 
 ```
 # entrar na pasta do exercício 2
@@ -59,12 +59,90 @@ cd aula/ex2
 # gerar a imagem do exercício 2 com o nome ex2
 docker build . -t ex2:1.0
 
-# subir o container do exercício 1
-docker run -d ex2:1.0
+# subir o container do exercício 2 com o nome ex2
+docker run -d --name ex2 ex2:1.0
 
 # verificar os containers que estão rodando na máquina
 docker ps
 
 # acessar o terminal docker container via linha de comando
+docker exec -it ex2 bash
+
+# verificar as pastas e os arquivos do container usando o terminal do container
+ls
+
+# criar um arquivo teste dentro do container
+touch teste
+```
+
+Execício 3 (Volumes compartilhados host:container)
+
+Digitar no terminal
+
+```
+# entrar na pasta do exercício 3
+cd aula/ex3
+
+# gerar a imagem do exercício 3 com o nome ex3
+docker build . -t ex3:1.0
+
+# subir o container do exercício 3 com o nome ex3
+docker run -d --name ex3 -v ./volume:/ex3/ ex23:1.0
+
+# verificar os containers que estão rodando na máquina
 docker ps
+
+# acessar o terminal docker container via linha de comando
+docker exec -it ex3 bash
+
+# criar arquivos teste1.txt, teste2.txt e teste3.txt fora do container
+
+# criar o arquivo teste4.txt dentro do container
+touch teste4.txt
+
+```
+
+Execício 4 (Parando, removendo, iniciando e resetando containers via Docker CLI)
+
+```
+# parando o container do exercício 2
+docker stop ex2
+
+# parando o container do exercício 3
+docker stop ex3
+
+# verificando situação dos containers
+docker ps
+
+# iniciando o container do exercício 2
+docker start ex2
+
+# iniciando o container do exercício 3
+docker start ex3
+
+# parando todos os containers que estão em execução
+docker stop $(docker ps -a -q)
+
+# parando todos os containers que estão parados
+docker rm $(docker ps -a -q)
+```
+
+Execício 5 (Parando, removendo, iniciando e resetando containers via extensão Docker do VS Code)
+
+```
+# inicializando os dois containers
+docker run -d --name ex2 ex2:1.0
+docker run -d --name ex3 ex3:1.0
+
+# apresentação da janela de containers
+# apresentação da janela de imagens
+# apresentação da janela de volumes
+
+# parar container ex2
+# parar container ex3
+# inicializar container ex2
+# inicializar container ex3
+# acessar terminal do container ex2
+# sair do terminal do container ex2
+# acessar terminal do conntainer ex3
 ```

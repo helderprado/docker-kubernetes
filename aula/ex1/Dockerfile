@@ -6,5 +6,3 @@ COPY . .
 
 # Configura o contêiner para ser executado como um executável.
 ENTRYPOINT ["python","script.py"]
-
-RUN python script.py
