@@ -209,3 +209,14 @@ docker-compose build
 # rodar os containers de todos os serviços do arquivo docker-compose.yaml com terminal desatachado
 docker-compose up -d
 ```
+
+```
+# entrar na pasta do exercício 8
+cd aula/ex8
+
+# gerar as imagens de todos os serviços do arquivo docker-compose.yaml
+docker-compose build
+
+# rodar os containers de todos os serviços do arquivo docker-compose.yaml com terminal desatachado
+docker-compose up -d
+```
