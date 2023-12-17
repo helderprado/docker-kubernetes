@@ -87,7 +87,7 @@ cd aula/ex3
 docker build . -t ex3:1.0
 
 # subir o container do exercício 3 com o nome ex3
-docker run -d --name ex3 -v ./volume:/ex3/ ex23:1.0
+docker run -d --name ex3 -v ./volume:/ex3/ ex3:1.0
 
 # verificar os containers que estão rodando na máquina
 docker ps
@@ -145,4 +145,67 @@ docker run -d --name ex3 ex3:1.0
 # acessar terminal do container ex2
 # sair do terminal do container ex2
 # acessar terminal do conntainer ex3
+```
+
+Execício 6 (Mapeamento de portas)
+
+Digitar no terminal
+
+```
+# entrar na pasta do exercício 6
+cd aula/ex6
+
+# gerar a imagem do exercício  com o nome ex6
+docker build . -t ex6:1.0
+
+# subir o container do exercício 6 com o nome ex6 compartilhando o diretório fonte da aplicação
+docker run -d --name ex6 -v ./app:/ex6/app ex6:1.0
+
+# tentar acessar a aplicação que está rodando dentro do container no browser pela porta 8000
+http://localhost:8000
+
+# remover o container via extensão Docker
+
+# adicionar o mapeamento de portas máquina:container para acessar o container
+docker run -d -p 8000:8000 --name ex6 -v ./app:/ex6/app ex6:1.0
+
+# resposta da requisição
+{message: "Estou dentro do container"}
+
+# alterar o texto da requisição para "A aplicação foi alterada..." no arquivo main.py
+
+# acessar novamente o browser na porta 8000 e receber a resposta da requisição
+{"message": "A aplicação foi alterada..."}
+
+# remover o container ex6 via extensão docker
+
+# alterando o mapeamento das portas para que a porta 9000 redirecione as requisições para a porta 8000 do container
+docker run -d -p 9000:8000 --name ex6 -v ./app:/ex6/app ex6:1.0
+
+# acessar a porta 9000 pelo browser e ser redirecionado para a porta 8000 do container
+# receber a resposta da requisição da aplicação
+{"message": "A aplicação foi alterada..."}
+
+# remover o container ex6 via extensão docker
+
+# alterando o mapeamento das portas para que a porta 8000 redirecione as requisições para a porta 9000 do container
+docker run -d -p 8000:9000 --name ex6 -v ./app:/ex6/app ex6:1.0
+
+# a aplicação não tem mais o acesso da porta do servidor do container via mapeamento de portas
+
+```
+
+Execício 7 (Orquestrando múltiplos containers usando Docker Compose)
+
+Digitar no terminal
+
+```
+# entrar na pasta do exercício 7
+cd aula/ex7
+
+# gerar as imagens de todos os serviços do arquivo docker-compose.yaml
+docker-compose build
+
+# rodar os containers de todos os serviços do arquivo docker-compose.yaml com terminal desatachado
+docker-compose up -d
 ```
