@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: servidor-python
+  labels:
+    app: servidor-python
+spec:
+  selector:
+    matchLabels:
+      app: servidor-python
+  replicas: 20
+  template:
+    metadata:
+      labels:
+        app: servidor-python
+    spec:
+      containers:
+        - name: servidor-python
+          image: helderprado/servidor-python:1.0

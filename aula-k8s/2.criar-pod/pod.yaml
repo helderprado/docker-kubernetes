@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: servidor-python
+  labels:
+    name: servidor-python
+spec:
+  containers:
+    - name: servidor-python
+      image: helderprado/servidor-python:1.0
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      ports:
+        - containerPort: 8000
