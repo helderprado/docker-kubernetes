@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import styles from "./page.module.css";
 
 export default function Home() {
-  const [resultado, setResultado] = useState("teste");
+  const [resultado, setResultado] = useState(
+    "Nenhuma requisição foi realizada..."
+  );
 
   async function fazerRequisicao() {
     try {

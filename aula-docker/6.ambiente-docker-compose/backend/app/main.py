@@ -1,5 +1,6 @@
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+import os
 
 app = FastAPI()
 
@@ -15,3 +16,10 @@ app.add_middleware(
 @app.get("/")
 async def root():
     return {"message": "Essa requisição do container no backend"}
+
+@app.get("/quebrar_app")
+def quebrar_app():
+    os.system("kill 1")
+    return {"message": "O container parou..."}
+
+

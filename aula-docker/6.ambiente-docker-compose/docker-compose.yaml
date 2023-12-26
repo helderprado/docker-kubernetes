@@ -20,6 +20,7 @@ services:
     working_dir: /ex8
     # comando a ser utilizado quando o container for criado
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    restart: always
 
   # nome do serviço
   frontend:
