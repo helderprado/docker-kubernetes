@@ -4,4 +4,4 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "A aplicação foi alterada..."}
+    return {"message": "Estou dentro do container..."}
