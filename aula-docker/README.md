@@ -269,6 +269,8 @@ docker-compose up -d
 
 ## Desenvolvendo uma aplicação Full Stack (front-end, back-end e banco de dados) utilizando containers que se comunicam
 
+Digitar no terminal
+
 ```bash
 # entrar na pasta 6-ambiente-docker-compose
 cd 6-ambiente-docker-compose
@@ -281,6 +283,8 @@ docker-compose up -d
 ```
 
 ## Subindo uma imagem para o Docker Hub (Registry)
+
+Digitar no terminal
 
 ```bash
 # entrar na pasta 7-subir-imagem-registry
