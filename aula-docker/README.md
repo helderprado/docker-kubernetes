@@ -279,3 +279,41 @@ docker-compose build
 # rodar os containers de todos os serviços do arquivo docker-compose.yaml com terminal desatachado
 docker-compose up -d
 ```
+
+## Subindo uma imagem para o Docker Hub (Registry)
+
+```bash
+# entrar na pasta 7-subir-imagem-registry
+cd 7-subir-imagem-registry
+
+# gerar a imagem com as instruções do arquivo Dockerfile
+docker build . -t jogo-par-impar:1.0
+
+# testar a imagem criada localmente
+docker run -i jogo-par-impar:1.0
+
+# subir a imagem para o seu repositório particular do Docker Hub (Registry) com o seu usário do Docker Hub
+docker push `USUARIO_DOCKER_HUB`/jogo-par-impar:1.0 # exemplo da aula: helderprado/jogo-par-impar:1.0
+
+# gerar novamente a imagem com a tag padrão para subir para o seu repositório particular do Docker Hub
+docker build . -t helderprado/jogo-par-impar:1.0
+
+# subir a imagem para o seu repositório particular do Docker Hub (Registry) com o seu usário do Docker Hub
+docker push `USUARIO_DOCKER_HUB`/jogo-par-impar:1.0
+
+# verificando a imagem no Docker Hub (Registry)
+# https://hub.docker.com
+
+# removendo a imagem local com o mesmo nome
+docker rmi helderprado/jogo-par-impar:1.0
+
+# verificar as imagens que estão disponíveis de forma local no Docker
+docker images
+
+# puxando a imagem recem armazenada no Docker Hub para o repositório de imagens local
+docker pull helderprado/jogo-par-impar:1.0
+
+# testar a imagem recém puxada para o repositório local do docker
+docker run -i helderprado/jogo-par-impar:1.0
+
+```
