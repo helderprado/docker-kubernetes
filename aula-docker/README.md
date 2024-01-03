@@ -267,7 +267,7 @@ docker-compose build
 docker-compose up -d
 ```
 
-## Desenvolvendo uma aplicação Full Stack (front-end, back-end e banco de dados) utilizando containers que se comunicam
+## Desenvolvendo uma aplicação Full Stack (front-end e back-end) utilizando containers que se comunicam em uma mesma rede
 
 Digitar no terminal
 
