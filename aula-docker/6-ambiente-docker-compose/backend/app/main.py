@@ -15,7 +15,7 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-    return {"message": "Essa requisição do container no backend"}
+    return {"message": "Essa é uma resposta do container do back-end!!! 🎉🎉🎉"}
 
 @app.get("/quebrar_app")
 def quebrar_app():

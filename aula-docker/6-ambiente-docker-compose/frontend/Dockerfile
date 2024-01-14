@@ -2,7 +2,7 @@
 FROM node:18-alpine
 
 # adicionar a camada que será o diretório padrão a ser utilizado
-WORKDIR /ex8
+WORKDIR /src
 
 # copiar o arquivo de instalação dos pacotes necessários para diretório padrão do container
 COPY package.json ./
@@ -12,6 +12,3 @@ RUN npm install
 
 # copiar todos os arquivos da máquina para o diretório do container
 COPY . .
-
-# rodar o comando de inicalização do servidor em modo de desenvolvimento
-CMD ["npm", "run", "dev"]

@@ -24,8 +24,11 @@ docker images
 # rodando o primeiro container docker da imagem que acabou de ser puxada do registry
 docker run hello-world
 
-# listando os containers e suas informações básicas
+# listando todos os containers e suas informações básicas
 docker ps -a
+
+# listando apenas os containers ativos e suas informações básicas
+docker ps
 
 ```
 
@@ -50,8 +53,14 @@ docker ps -a
 # removendo o container utilizando o seu id, já que o container não tem nome
 docker rm `ID_DO_CONTAINER`
 
+# verificando a situação dos containers após a remoção do container com a imagem imagem-script
+docker ps -a
+
 # subir o container da imagem imagem-script e eliminar ele após rodar todas as linhas do Dockerfile
 docker run --rm imagem-script
+
+# verificando a situação dos containers após a remoção do container com a imagem imagem-script
+docker ps -a
 ```
 
 Alterar arquivo
@@ -79,6 +88,10 @@ docker run --rm imagem-script-alterado
 Digitar no terminal
 
 ```bash
+
+# acessar o diretório anterior ao atual
+cd ..
+
 # entrar na pasta 2-criar-imagem-ininterrupta
 cd 2-criar-imagem-ininterrupta
 
@@ -115,6 +128,9 @@ docker stop imagem-ininterrupta
 # remover o container
 docker rm imagem-ininterrupta
 
+# o container também pode ser removido diretamento usando a flag -f
+# docker rm -f imagem-ininterrupta
+
 # subir novamente o container para verificar se o arquivo criado ainda está lá
 docker run -d --name imagem-ininterrupta imagem-ininterrupta:1.0
 
@@ -131,6 +147,10 @@ ls
 Digitar no terminal
 
 ```bash
+
+# acessar o diretório anterior ao atual
+cd ..
+
 # entrar na pasta 3-containers-e-volumes
 cd 3-containers-e-volumes
 
@@ -154,12 +174,17 @@ ls
 # criar o arquivo teste3.txt dentro do container
 touch teste4.txt
 
+# sair do container
+exit
+
+# verificar e inspecionar o container utilizanco o comando inspect
+docker inspect containers-e-volumes
+
 ```
 
-Operações básicas com arando, removendo, iniciando e resetando containers via Docker CLI)
+## Operações básicas como parar, rmover, iniciar e reiniciar containers via Docker CLI
 
 ```bash
-
 
 # parar o container com o nome imagem-ininterrupta
 docker stop imagem-ininterrupta
@@ -182,11 +207,17 @@ docker ps -a
 # parando todos os containers que estão em execução
 docker stop $(docker ps -a -q)
 
+# verificando situação dos containers
+docker ps -a
+
 # removendo todos os containers que estão parados
 docker rm $(docker ps -a -q)
+
+# verificando situação dos containers
+docker ps -a
 ```
 
-## Parando, removendo, iniciando e resetando containers via extensão Docker do VS Code)
+## Operações básicas como parar, rmover, iniciar e reiniciar containers via extensão Docker do VS Code
 
 ```bash
 # inicializando dois containers da mesma imagem
@@ -207,6 +238,10 @@ docker run -d imagem-ininterrupta:1.0
 Digitar no terminal
 
 ```bash
+
+# acessar o diretório anterior ao atual
+cd ..
+
 # entrar na pasta 4-container-api
 cd 4-container-api
 
@@ -246,6 +281,9 @@ docker run -d -p 9000:8000 --name container-api -v ./app:/api/app container-api:
 # alterando o mapeamento das portas para que a porta 8000 redirecione as requisições para a porta 9000 do container
 docker run -d -p 8000:9000 --name container-api -v ./app:/api/app container-api:1.0
 
+# verificar mapeamento de portas com o comando inspect
+docker inspect container-api
+
 # a aplicação não tem mais o acesso da porta do servidor do container via mapeamento de portas
 
 # remover o container container-api via extensão docker
@@ -257,14 +295,32 @@ docker run -d -p 8000:9000 --name container-api -v ./app:/api/app container-api:
 Digitar no terminal
 
 ```bash
+
+# acessar o diretório anterior ao atual
+cd ..
+
 # entrar na pasta 5-intro-docker-compose
 cd 5-intro-docker-compose
 
 # gerar as imagens de todos os serviços do arquivo docker-compose.yaml
 docker-compose build
 
+# verificar as imagens criada depois do build
+docker images
+
 # rodar os containers de todos os serviços do arquivo docker-compose.yaml com terminal desatachado
 docker-compose up -d
+
+# verificar as rotas da API
+# / -> {"message": "Estou dentro do container..."}
+# /variavel_ambiente -> {"USERNAME": "DOCKER"}
+
+# derrubar o conjunto de containers utilizando o comando down
+docker-compose down
+
+# verificar a situação atual dos containers
+docker ps -a
+
 ```
 
 ## Desenvolvendo uma aplicação Full Stack (front-end e back-end) utilizando containers que se comunicam em uma mesma rede
@@ -272,6 +328,10 @@ docker-compose up -d
 Digitar no terminal
 
 ```bash
+
+# acessar o diretório anterior ao atual
+cd ..
+
 # entrar na pasta 6-ambiente-docker-compose
 cd 6-ambiente-docker-compose
 
@@ -280,6 +340,10 @@ docker-compose build
 
 # rodar os containers de todos os serviços do arquivo docker-compose.yaml com terminal desatachado
 docker-compose up -d
+
+# remover todos os container, volumes e redes utilizando o comando down com a tag -v
+docker-compose down -v
+
 ```
 
 ## Subindo uma imagem para o Docker Hub (Registry)
@@ -287,6 +351,10 @@ docker-compose up -d
 Digitar no terminal
 
 ```bash
+
+# acessar o diretório anterior ao atual
+cd ..
+
 # entrar na pasta 7-subir-imagem-registry
 cd 7-subir-imagem-registry
 
@@ -300,7 +368,7 @@ docker run -i jogo-par-impar:1.0
 docker push `USUARIO_DOCKER_HUB`/jogo-par-impar:1.0 # exemplo da aula: helderprado/jogo-par-impar:1.0
 
 # gerar novamente a imagem com a tag padrão para subir para o seu repositório particular do Docker Hub
-docker build . -t helderprado/jogo-par-impar:1.0
+docker build . -t `USUARIO_DOCKER_HUB`/jogo-par-impar:1.0
 
 # subir a imagem para o seu repositório particular do Docker Hub (Registry) com o seu usário do Docker Hub
 docker push `USUARIO_DOCKER_HUB`/jogo-par-impar:1.0
@@ -309,15 +377,16 @@ docker push `USUARIO_DOCKER_HUB`/jogo-par-impar:1.0
 # https://hub.docker.com
 
 # removendo a imagem local com o mesmo nome
-docker rmi helderprado/jogo-par-impar:1.0
+docker rmi `USUARIO_DOCKER_HUB`/jogo-par-impar:1.0
 
 # verificar as imagens que estão disponíveis de forma local no Docker
 docker images
 
 # puxando a imagem recem armazenada no Docker Hub para o repositório de imagens local
-docker pull helderprado/jogo-par-impar:1.0
+docker pull `USUARIO_DOCKER_HUB`/jogo-par-impar:1.0
 
 # testar a imagem recém puxada para o repositório local do docker
-docker run -i helderprado/jogo-par-impar:1.0
+docker run -i `USUARIO_DOCKER_HUB`/jogo-par-impar:1.0
+
 
 ```
