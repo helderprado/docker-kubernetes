@@ -110,12 +110,23 @@ docker exec -it imagem-ininterrupta bash
 # acessar o kernel do python dentro do container
 python
 
+```
+
+Digitar no kernel do Python
+
+```python
+
 # testando o python dentro do container
->>> print("python dentro do container")
+print("python dentro do container")
 
 # sair do kernel do python
-ctrl+z
+exit()
 
+```
+
+Digitar no terminal
+
+```bash
 # verificar as pastas e os arquivos do container usando o terminal do container
 ls
 
@@ -140,6 +151,9 @@ docker exec -it imagem-ininterrupta bash
 # verificar as pastas e os arquivos do container usando o terminal do container
 ls
 
+# sair do container
+exit
+
 ```
 
 ## Criando volumes compartilhados host:container
@@ -158,7 +172,8 @@ cd 3-containers-e-volumes
 docker build . -t containers-e-volumes:1.0
 
 # subir o container 3-containers-e-volumes com o nome containers-e-volumes e o volume host:container
-docker run -d --name containers-e-volumes -v ./volume:/app containers-e-volumes:1.0
+docker run -d --name containers-e-volumes -v ${PWD}/volume:/app containers-e-volumes:1.0 # Windows -> PowerShell
+# docker run -d --name containers-e-volumes -v ./volume:/app containers-e-volumes:1.0 # Linux -> bash
 
 # verificar os containers que estão rodando na máquina
 docker ps -a
@@ -222,7 +237,7 @@ docker ps -a
 ```bash
 # inicializando dois containers da mesma imagem
 docker run -d imagem-ininterrupta:1.0
-docker run -d imagem-ininterrupta:1.0
+docker run -d containers-e-volumes:1.0
 
 # parar container imagem-ininterrupta
 # parar container containers-e-volumes
@@ -249,7 +264,8 @@ cd 4-container-api
 docker build . -t container-api:1.0
 
 # subir o container do container-api com o nome container-api compartilhando o diretório fonte da aplicação
-docker run -d --name container-api -v ./app:/api/app container-api:1.0
+docker run -d --name container-api -v ${PWD}/app:/api/app container-api:1.0 # Windows -> PowerShell
+# docker run -d --name container-api -v ./app:/api/app container-api:1.0 # Linux -> bash
 
 # tentar acessar a aplicação que está rodando dentro do container no browser pela porta 8000
 # http://localhost:8000
@@ -257,7 +273,8 @@ docker run -d --name container-api -v ./app:/api/app container-api:1.0
 # remover o container via extensão Docker
 
 # adicionar o mapeamento de portas máquina:container para acessar o container
-docker run -d -p 8000:8000 --name container-api -v ./app:/api/app container-api:1.0
+docker run -d -p 8000:8000 --name container-api -v ${PWD}/app:/api/app container-api:1.0 # Windows -> PowerShell
+# docker run -d -p 8000:8000 --name container-api -v ./app:/api/app container-api:1.0 # Linux -> bash
 
 # resposta da requisição
 # JSON -> {message: "Estou dentro do container.."}
@@ -270,7 +287,8 @@ docker run -d -p 8000:8000 --name container-api -v ./app:/api/app container-api:
 # remover o container container-api via extensão docker
 
 # alterando o mapeamento das portas para que a porta 9000 redirecione as requisições para a porta 8000 do container
-docker run -d -p 9000:8000 --name container-api -v ./app:/api/app container-api:1.0
+docker run -d -p 9000:8000 --name container-api -v ${PWD}/app:/api/app container-api:1.0 # Windows -> PowerShell
+# docker run -d -p 9000:8000 --name container-api -v ./app:/api/app container-api:1.0 # Linux -> bash
 
 # acessar a porta 9000 pelo browser e ser redirecionado para a porta 8000 do container
 # receber a resposta da requisição da aplicação
@@ -279,7 +297,8 @@ docker run -d -p 9000:8000 --name container-api -v ./app:/api/app container-api:
 # remover o container container-api via extensão docker
 
 # alterando o mapeamento das portas para que a porta 8000 redirecione as requisições para a porta 9000 do container
-docker run -d -p 8000:9000 --name container-api -v ./app:/api/app container-api:1.0
+docker run -d -p 8000:9000 --name container-api -v ${PWD}/app:/api/app container-api:1.0 # Windows -> PowerShell
+# docker run -d -p 8000:9000 --name container-api -v ./app:/api/app container-api:1.0 # Linux -> bash
 
 # verificar mapeamento de portas com o comando inspect
 docker inspect container-api
@@ -362,7 +381,7 @@ cd 7-subir-imagem-registry
 docker build . -t jogo-par-impar:1.0
 
 # testar a imagem criada localmente
-docker run -i jogo-par-impar:1.0
+docker run -it jogo-par-impar:1.0
 
 # subir a imagem para o seu repositório particular do Docker Hub (Registry) com o seu usário do Docker Hub
 docker push `USUARIO_DOCKER_HUB`/jogo-par-impar:1.0 # exemplo da aula: helderprado/jogo-par-impar:1.0
@@ -386,7 +405,6 @@ docker images
 docker pull `USUARIO_DOCKER_HUB`/jogo-par-impar:1.0
 
 # testar a imagem recém puxada para o repositório local do docker
-docker run -i `USUARIO_DOCKER_HUB`/jogo-par-impar:1.0
-
+docker run -it `USUARIO_DOCKER_HUB`/jogo-par-impar:1.0
 
 ```

@@ -12,12 +12,12 @@ services:
       dockerfile: Dockerfile
     # volumes compartilhados entre máquina e container
     volumes:
-      - ./app:/ex7/app
+      - ./app:/src/app
     # mapeamento de portas 8000 -> 8000 (máquina -> container)
     ports:
       - "8000:8000"
     # diretório padrão dentro do container
-    working_dir: /ex7
+    working_dir: /src
     # definição das variáveis de ambiente via arquivo .env
     environment:
       - USERNAME=${USERNAME}

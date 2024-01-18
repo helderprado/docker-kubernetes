@@ -38,6 +38,7 @@ services:
     # mapeamento de portas 3000 -> 3000 (máquina -> container)
     ports:
       - "3000:3000"
+    # comando a ser utilizado quando o container for criado
     command: npm run dev
 
 # volumes docker a serem criados

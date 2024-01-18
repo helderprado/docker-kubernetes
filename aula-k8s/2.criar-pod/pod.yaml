@@ -8,9 +8,15 @@ spec:
   containers:
     - name: servidor-python
       image: helderprado/servidor-python:1.0
-      resources:
-        limits:
-          memory: "128Mi"
-          cpu: "500m"
+
       ports:
         - containerPort: 8000
+
+      resources:
+        limits:
+          memory: "100Mi"
+          cpu: "100m"
+
+      envFrom:
+        - secretRef:
+            name: servidor-python-secrets

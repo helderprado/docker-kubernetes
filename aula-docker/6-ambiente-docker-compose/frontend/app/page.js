@@ -25,9 +25,14 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <h1 style={{marginBottom: 20}}>MBA em Engenharia de Software | MBA USP/Esalq</h1>
+      <h1 style={{ marginBottom: 20 }}>
+        MBA em Engenharia de Software | MBA USP/Esalq
+      </h1>
       {/* botão que faz a requisição quando clicado */}
-      <button style={{ padding: 10, margin: 20, fontSize: 24 }} onClick={fazerRequisicao}>
+      <button
+        style={{ padding: 10, margin: 20, fontSize: 24 }}
+        onClick={fazerRequisicao}
+      >
         Fazer requisição ao back-end
       </button>
       {/* elemento que printa dinamicamente o valor da variável resultado */}
